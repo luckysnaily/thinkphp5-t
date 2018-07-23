@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+  Options +FollowSymlinks -Multiviews
+  RewriteEngine On  #开启重写规则
+  RewriteCond %{REQUEST_FILENAME} !-d  #如果请求的不是一个目录（-d 代表目录）
+  RewriteCond %{REQUEST_FILENAME} !-f  #且如果请求的不是一个文件（-f 代表文件）
+  RewriteRule ^(.*)$ index.php?/$1 [QSA,PT,L]  #上面两个条件都不满足，执行RewriteRule重写规则
+</IfModule>
