@@ -30,7 +30,7 @@ Route::get("left",'admin/index/left');
 Route::get("top",'admin/index/top');
 Route::get("main",'admin/index/main');
 
-Route::get("login",'admin/index/login');
-Route::get("logout",'admin/index/logout');
+Route::get("login",'admin/public/login');
+Route::get("logout",'admin/public/logout');
 
 Route::get('test', 'admin/index/test');
