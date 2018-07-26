@@ -10,7 +10,7 @@
     $(function() {
         //导航切换
         $(".menuson li").click(function() {
-            $(".menuson li.active").removeClass("active")
+            $(".menuson li.active").removeClass("active");
             $(this).addClass("active");
         });
 
@@ -32,13 +32,13 @@
     <dl class="leftmenu">
         <dd>
             <div class="title">
-                <span><img src="{:config('admin_static')}/images/leftico01.png" /></span>商品管理
+                <span><img src="{:config('admin_static')}/images/leftico01.png" /></span>文章分类管理
             </div>
             <ul class="menuson">
                 <li>
-                    <cite></cite><a href="showList.html" target="rightFrame">商品列表</a><i></i></li>
+                    <cite></cite><a href="{:url('admin/category/index')}" target="rightFrame">分类列表</a><i></i></li>
                 <li>
-                    <cite></cite><a href="add.html" target="rightFrame">添加商品</a><i></i></li>
+                    <cite></cite><a href="{:url('admin/category/add')}" target="rightFrame">添加分类</a><i></i></li>
             </ul>
         </dd>
         <dd>

@@ -30,7 +30,23 @@ Route::get("left",'admin/index/left');
 Route::get("top",'admin/index/top');
 Route::get("main",'admin/index/main');
 
+Route::post("login",'admin/public/login');
 Route::get("login",'admin/public/login');
 Route::get("logout",'admin/public/logout');
 
 Route::get('test', 'admin/index/test');
+
+
+Route::get('index', 'admin/test/index');
+Route::get('model', 'admin/test/model');
+
+Route::group('admin', function ()
+{
+	// 分类相关路由
+	Route::get('category/add', 'admin/category/add');
+	Route::post('category/add', 'admin/category/add');
+	Route::get('category/index', 'admin/category/index');
+	Route::get('category/upd', 'admin/category/upd');
+	Route::post('category/upd', 'admin/category/upd');
+
+});
