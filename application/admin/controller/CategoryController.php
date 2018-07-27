@@ -5,6 +5,7 @@ namespace app\admin\controller;
 use think\Request;
 use think\Validate;
 use app\admin\model\Category;
+use app\admin\model\Article;
 
 class CategoryController extends CommonController
 {
@@ -65,7 +66,6 @@ class CategoryController extends CommonController
 			// 	# 验证没通过
 			// 	$this->error( implode(',', $validate->getError()) );
 			// }
-
 			
 			#验证通过之后进行数据入库
 			if ( $catModel->save($postData) ) {
@@ -94,7 +94,7 @@ class CategoryController extends CommonController
 			# 接受数据
 			$postData = input('post.');
 
-			# 验证数据   
+			# 验证数据
 			# Category.upd 表示应用Category验证器下的upd场景的验证规则
 			$result = $this->validate($postData, 'Category.upd', [], true);
 			if ( true !== $result ) {
@@ -119,6 +119,49 @@ class CategoryController extends CommonController
 			'cats' => $cats, 
 			'catInfo' => $catInfo,
 		]);
+	}
+
+	public function ajaxDel()
+	{
+		if ( request()->isAjax() ) {
+			$cat_id = input('cat_id');
+			$where = [ 'pid' => $cat_id ];
+
+			// 查询判断分类下是否有子分类
+			$sonCats = Category::where($where)->find();
+			if ( $sonCats ) { // 如果有子分类
+				$response = [
+					'code' => -1,
+					'message' => '该分类下有子分类,无法删除'
+				];
+				return json($response);die;
+			}
+
+			// 查询判断分类下是否有文章
+			$articles = Article::where(["cat_id"=>$cat_id])->find();
+			if ( $articles ) {
+				$response = [
+					'code' => -2,
+					'message' => '该分类下有文章,无法删除'
+				];
+				return json($response);die();
+			}
+
+			// 分类下既没有子分类,又没有文章时才可以删除分类
+			if ( Category::destroy($cat_id) ) {
+				$response = [
+					'code' => 200,
+					'message' => '删除成功',
+				];
+				return json($response);die;
+			}else {
+				$response = [
+					'code' => -3,
+					'message' => '删除失败',
+				];
+				return json($response);die;
+			}
+		}
 	}
 
 }

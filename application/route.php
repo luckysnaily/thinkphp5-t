@@ -48,5 +48,11 @@ Route::group('admin', function ()
 	Route::get('category/index', 'admin/category/index');
 	Route::get('category/upd', 'admin/category/upd');
 	Route::post('category/upd', 'admin/category/upd');
+	Route::get('category/ajaxDel', 'admin/category/ajaxDel');
 
+
+	// 文章相关路由
+	Route::get('article/index','admin/article/index');
+	Route::get('article/add','admin/article/add');
+	Route::post('article/add','admin/article/add');
 });
