@@ -55,4 +55,8 @@ Route::group('admin', function ()
 	Route::get('article/index','admin/article/index');
 	Route::get('article/add','admin/article/add');
 	Route::post('article/add','admin/article/add');
+	Route::get('article/upd','admin/article/upd');
+	Route::post('article/upd','admin/article/upd');
+	Route::get('article/del','admin/article/del');
+	Route::get('article/getContent','admin/article/getContent');
 });

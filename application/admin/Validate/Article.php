@@ -19,5 +19,6 @@ class Article extends Validate
 
 	protected $scene = [
 		'add' => ['title', 'cat_id'],
+		'upd' => ['title', 'cat_id'],
 	];
 }
